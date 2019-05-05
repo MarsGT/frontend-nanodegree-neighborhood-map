@@ -13,6 +13,19 @@ const Loading = () => {
     )
 }
 class MapContainer extends Component {
+    state = {
+        showingInfoWindow: false,
+        activeMarker: {},
+        selectedPlace: {},
+    };
+
+    onMarkerClick = (props, marker) =>
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        });
+
     render() {
         const style = {
             width: '100vw',
