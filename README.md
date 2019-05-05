@@ -19,7 +19,7 @@
 - 可以使用 `yarn build`，将本项目编译为可在生产环境下部署的静态文件
 
 ## 需要注意
-由于 Google Maps API 的一些限制，地图可能会显示半透明黑色遮罩以及 “For development purposes only” 字样。
+由于 Google Maps API 对免费账户调用频率上的一些限制，地图可能会显示半透明黑色遮罩以及 “For development purposes only” 字样。但并不影响使用。
 
 ## 更多内容
 如果你对此项目感兴趣，可以访问 [优达学城论坛](https://discussions.youdaxue.com/c/fend/nd001-neighborhood-map-project) 了解更多相关信息。
