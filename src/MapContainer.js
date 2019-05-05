@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
-const LoadingContainer = () => {
-    <div>正在加载，请稍候~</div>
+const Loading = () => {
+    const style = {
+        width: '100vw',
+        height: '100vh',
+        lineHeight: '100vh',
+        textAlign: 'center'
+    }
+    return (
+        <div style={style}>正在加载，请稍候...</div>
+    )
 }
 class MapContainer extends Component {
     render() {
