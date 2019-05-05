@@ -1,68 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 优达学城街区地图应用项目
 
-## Available Scripts
+本应用用于展示相应社区的地图或搜索指定的社区，其功能包括：
 
-In the project directory, you can run:
+1. 显示热门地点
+2. 自定义地图标记
+3. 地点搜索
+4. 用于展示所有地点的列表视图
 
-### `npm start`
+除此以外，每个地点还将会显示详细信息（例如街景图片、维基百科文章、Yelp 评论等）。
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 项目架构
+本项目为单页应用，使用 React 构建，并且使用了 Google Maps API 提供的地图服务
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## 怎样运行
+- 在命令行克隆本项目 `git clone https://github.com/marsgt/frontend-nanodegree-neighborhood-map.git`
+- 使用 `cd frontend-nanodegree-neighborhood-map`切换到根目录下，运行`yarn install`安装所有的项目依赖
+- 安装依赖后，运行 `yarn start`将启动项目（开发服务器）并直接打开网页
+- 可以使用 `yarn build`，将本项目编译为可在生产环境下部署的静态文件
 
-### `npm test`
+## 需要注意
+由于 Google Maps API 的一些限制，地图可能会显示半透明黑色遮罩以及 “For development purposes only” 字样。
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## 更多内容
+如果你对此项目感兴趣，可以访问 [优达学城论坛](https://discussions.youdaxue.com/c/fend/nd001-neighborhood-map-project) 了解更多相关信息。
