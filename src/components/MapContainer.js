@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
 import { Loader } from 'rsuite'
 
+// 加载提示
 const Loading = () => (
     <Loader backdrop center speed='fast' size='md' content='正在加载，请稍候...' />
 )
 
+// 自定义地图样式
 const mapStyle = [
     {
         featureType: 'water',
@@ -97,11 +99,13 @@ class MapContainer extends Component {
 
     onMarkerClick = (props, marker) => { }
 
-    getVenues = (latlng, query) => {
+    // 从Foursquare请求地点信息
+    getVenues = (latlng, search) => {
         const url = 'https://api.foursquare.com/v2/venues/explore?'
         const client_id = '3XGZ3YW1BLDWP0M1RDXHJUDQ1L32WSZ1UOFLW0VLVXCVAC1K'
         const client_secret = 'XC4FNRIBWXZXAESV4YGHNEXV5KP4GWNYZUH0AWDZQOP0O4V0'
-        const ll = latlng || '39.9075,116.39723'
+        const ll = latlng || '39.9075,116.39723' // Foursquare的北京中心坐标
+        const query = search || ''
         const parameters = {
             client_id,
             client_secret,
@@ -111,6 +115,7 @@ class MapContainer extends Component {
             limit: 10
         }
 
+        // 请求数据
         catta(url + new URLSearchParams(parameters))
             .then(res => {
                 const venues = res.response.venues
@@ -133,7 +138,7 @@ class MapContainer extends Component {
         const { google } = this.props
         const maps = google.maps
 
-        const cityBeijingPos = new maps.LatLng(39.9047253699, 116.4072154982)
+        const cityBeijingPos = new maps.LatLng(39.9047253699, 116.4072154982) // 北京市中心定位
 
         return (
             <div style={style}>
