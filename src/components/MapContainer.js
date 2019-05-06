@@ -97,16 +97,14 @@ class MapContainer extends Component {
                 ]
             }
         ]
+        const cityBeijing = new google.maps.LatLng(39.9047253699, 116.4072154982)
         return (
             <div style={style}>
                 <Map
                     google={this.props.google}
                     zoom={14}
                     mapTypeControl={false}
-                    center={{
-                        lat: 40.7413549,
-                        lng: -73.9980244
-                    }}
+                    initialCenter={cityBeijing}
                     styles={mapStyle}
                 >
                     <Marker
