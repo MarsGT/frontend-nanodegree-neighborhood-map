@@ -23,3 +23,9 @@
 
 ## 更多内容
 如果你对此项目感兴趣，可以访问 [优达学城论坛](https://discussions.youdaxue.com/c/fend/nd001-neighborhood-map-project) 了解更多相关信息。
+
+## 参考索引
+- [Maps JavaScript API - Overview](https://developers.google.com/maps/documentation/javascript/tutorial)
+- [Google Map React Component](https://github.com/fullstackreact/google-maps-react)
+- [How to Write a Google Maps React Component](https://www.fullstackreact.com/articles/how-to-write-a-google-maps-react-component/)
+- [Documentation - Foursquare Developer](https://developer.foursquare.com/docs)
