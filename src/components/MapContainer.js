@@ -125,6 +125,10 @@ class MapContainer extends Component {
                     zoom={14}
                     mapTypeControl={false}
                     initialCenter={currentLocation || cityBeijing}
+                    zoomControlOptions={{
+                        position: maps.ControlPosition.RIGHT_BOTTOM,
+                        style: maps.ZoomControlStyle.SMALL
+                    }}
                     styles={mapStyle}
                 >
                     <Marker
