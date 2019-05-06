@@ -81,7 +81,7 @@ const mapStyle = [
 class MapContainer extends Component {
     state = {
         currentLocation: null
-    };
+    }
 
     componentDidMount() {
         if (this.props.centerAroundCurrentLocation) {
@@ -105,8 +105,8 @@ class MapContainer extends Component {
     onMarkerClick = (props, marker) => {}
 
     render() {
-        const google = this.props.google;
-        const maps = google.maps;
+        const { google } = this.props
+        const maps = google.maps
 
         const cityBeijingPos = new maps.LatLng(39.9047253699, 116.4072154982)
         
