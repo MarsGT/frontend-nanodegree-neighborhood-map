@@ -1,17 +1,11 @@
-import React, { Component } from 'react';
-import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import React, { Component } from 'react'
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
+import { Loader } from 'rsuite'
 
-const Loading = () => {
-    const style = {
-        width: '100vw',
-        height: '100vh',
-        lineHeight: '100vh',
-        textAlign: 'center'
-    }
-    return (
-        <div style={style}>正在加载，请稍候...</div>
-    )
-}
+const Loading = () => (
+    <Loader backdrop center speed='fast' size='md' content='正在加载，请稍候...' />
+)
+
 const mapStyle = [
     {
         featureType: 'water',
