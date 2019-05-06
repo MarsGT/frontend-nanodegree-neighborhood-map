@@ -14,10 +14,10 @@ const Loading = () => {
 }
 class MapContainer extends Component {
     state = {
-        showingInfoWindow: false,
-        activeMarker: {},
-        selectedPlace: {},
-        currentLocation: null
+        currentLocation: {
+            lat: 0,
+            lng: 0
+        }
     };
 
     componentDidMount() {
@@ -39,12 +39,7 @@ class MapContainer extends Component {
         }
     }
 
-    onMarkerClick = (props, marker) =>
-        this.setState({
-            selectedPlace: props,
-            activeMarker: marker,
-            showingInfoWindow: true
-        });
+    onMarkerClick = (props, marker) => {}
 
     render() {
         const style = {
@@ -119,7 +114,8 @@ class MapContainer extends Component {
         ]
         const google = this.props.google;
         const maps = google.maps;
-        const cityBeijing = new maps.LatLng(39.9047253699, 116.4072154982)
+
+        const cityBeijingPos = new maps.LatLng(39.9047253699, 116.4072154982)
         
         return (
             <div style={style}>
@@ -127,7 +123,7 @@ class MapContainer extends Component {
                     google={google}
                     zoom={14}
                     mapTypeControl={false}
-                    initialCenter={currentLocation || cityBeijing}
+                    initialCenter={currentLocation || cityBeijingPos}
                     zoomControlOptions={{
                         position: maps.ControlPosition.RIGHT_BOTTOM,
                         style: maps.ZoomControlStyle.SMALL
@@ -136,7 +132,7 @@ class MapContainer extends Component {
                 >
                     <Marker
                         onClick={this.onMarkerClick}
-                        name={'Current location'}
+                        name={'???'}
                         position={{ lat: 37.759703, lng: -122.428093 }}
                     />
                 </Map>
