@@ -25,7 +25,11 @@ class App extends Component {
                     <Nav>
                         <Nav.Item eventKey='1' icon={<Icon icon='search' />}>
                             <InputGroup inside style={{ width: 300, marginBottom: 10 }}>
-                                <AutoComplete placeholder='搜索' data={data} value={value} onChange={this.handleChange} />
+                                <AutoComplete placeholder='搜索' data={data} value={value} onChange={this.handleChange}
+                                    renderItem={item => (
+                                        <p><Icon icon='map-marker' /> {item.label}</p>
+                                    )}
+                                />
                                 <InputGroup.Addon>
                                     <Icon icon='search' />
                                 </InputGroup.Addon>
