@@ -97,7 +97,10 @@ class MapContainer extends Component {
                 ]
             }
         ]
-        const cityBeijing = new google.maps.LatLng(39.9047253699, 116.4072154982)
+        const google = this.props.google;
+        const maps = google.maps;
+        const cityBeijing = new maps.LatLng(39.9047253699, 116.4072154982)
+        
         return (
             <div style={style}>
                 <Map
