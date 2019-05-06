@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 const Loading = () => {
     const style = {
@@ -114,14 +114,6 @@ class MapContainer extends Component {
                         onClick={this.onMarkerClick}
                         name={'Current location'}
                     />
-                    <InfoWindow
-                        marker={this.state.activeMarker}
-                        visible={this.state.showingInfoWindow}
-                    >
-                        <div>
-                            <h1>{this.state.selectedPlace.name}</h1>
-                        </div>
-                    </InfoWindow>
                 </Map>
             </div>
         )
