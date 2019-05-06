@@ -79,21 +79,19 @@ class MapContainer extends Component {
     }
 
     componentDidMount() {
-        if (this.props.centerAroundCurrentLocation) {
-            if (navigator && navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((pos) => {
-                    const coords = pos.coords
-                    this.setState({
-                        currentLocation: {
-                            lat: coords.latitude,
-                            lng: coords.longitude
-                        }
-                    })
+        if (navigator && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                const coords = pos.coords
+                this.setState({
+                    currentLocation: {
+                        lat: coords.latitude,
+                        lng: coords.longitude
+                    }
                 })
-            } else {
-                alert('抱歉！您的浏览器貌似不支持定位~')
-                console.error(`Error: Your browser doesn't support geolocation.`)
-            }
+            })
+        } else { // 没有获得定位信息
+            alert('抱歉！您的浏览器貌似不支持定位~')
+            console.error(`Error: Your browser doesn't support geolocation.`)
         }
     }
 
