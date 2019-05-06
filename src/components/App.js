@@ -21,10 +21,7 @@ class App extends Component {
         const { isExpand, data, value } = this.state
         return (
             <Frame className='App'>
-                <Frame.Nav
-                    logo={<Icon icon='search' />}
-                    expand={isExpand}
-                >
+                <Frame.Nav logo={<Icon icon='search' />} expand={isExpand} >
                     <Nav>
                         <Nav.Item eventKey='1' icon={<Icon icon='search' />}>
                             <InputGroup inside style={{ width: 300, marginBottom: 10 }}>
