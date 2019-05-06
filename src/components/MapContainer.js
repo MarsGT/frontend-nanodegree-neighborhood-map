@@ -134,6 +134,7 @@ class MapContainer extends Component {
                     <Marker
                         onClick={this.onMarkerClick}
                         name={'Current location'}
+                        position={{ lat: 37.759703, lng: -122.428093 }}
                     />
                 </Map>
             </div>
