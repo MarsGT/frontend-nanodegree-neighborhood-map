@@ -104,7 +104,7 @@ class MapContainer extends Component {
         return (
             <div style={style}>
                 <Map
-                    google={this.props.google}
+                    google={google}
                     zoom={14}
                     mapTypeControl={false}
                     initialCenter={cityBeijing}
