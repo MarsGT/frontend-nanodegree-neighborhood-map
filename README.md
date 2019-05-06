@@ -10,7 +10,7 @@
 除此以外，每个地点还将会显示详细信息（例如街景图片、维基百科文章、Yelp 评论等）。
 
 ## 项目架构
-本项目为单页应用，使用 React 构建，并且使用了 Google Maps API 提供的地图服务
+本项目为单页应用，使用 React 构建，内容部分使用了 Google Maps API 提供的地图服务，以及 Foursquare 提供的信息数据。
 
 ## 怎样运行
 - 在命令行克隆本项目 `git clone https://github.com/marsgt/frontend-nanodegree-neighborhood-map.git`
