@@ -32,6 +32,9 @@ class MapContainer extends Component {
                         }
                     })
                 })
+            } else {
+                alert('抱歉！您的浏览器貌似不支持定位~')
+                console.error(`Error: Your browser doesn't support geolocation.`)
             }
         }
     }
