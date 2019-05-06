@@ -8,7 +8,8 @@ class App extends Component {
     state = {
         isExpand: true,
         data: [],
-        value: ''
+        value: '',
+        markerList: []
     }
 
     handleChange(value) {
@@ -18,7 +19,7 @@ class App extends Component {
     }
 
     render() {
-        const { isExpand, data, value } = this.state
+        const { isExpand, data, value, markerList } = this.state
         return (
             <Frame className='App'>
                 <Frame.Nav logo={<Icon icon='search' />} expand={isExpand} >
@@ -38,7 +39,7 @@ class App extends Component {
                     </Nav>
                 </Frame.Nav>
                 <Frame.Content>
-                    <MapContainer />
+                    <MapContainer markerList={markerList} />
                 </Frame.Content>
             </Frame>
         )
