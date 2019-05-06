@@ -29,3 +29,5 @@
 - [Google Map React Component](https://github.com/fullstackreact/google-maps-react)
 - [How to Write a Google Maps React Component](https://www.fullstackreact.com/articles/how-to-write-a-google-maps-react-component/)
 - [Documentation - Foursquare Developer](https://developer.foursquare.com/docs)
+- [RSUITE 3](https://rsuitejs.com/)
+- [@rsuite/react-frame](https://github.com/rsuite/react-frame)
