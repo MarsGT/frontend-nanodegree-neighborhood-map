@@ -74,7 +74,8 @@ const mapStyle = [
 ]
 class MapContainer extends Component {
     state = {
-        currentLocation: null
+        currentLocation: null,
+        markerList: []
     }
 
     componentDidMount() {
@@ -96,14 +97,46 @@ class MapContainer extends Component {
         }
     }
 
-    onMarkerClick = (props, marker) => {}
+    onMarkerClick = (props, marker) => { }
+
+    getVenues = (latlng, query) => {
+        const url = 'https://api.foursquare.com/v2/venues/explore?'
+        const client_id = '3XGZ3YW1BLDWP0M1RDXHJUDQ1L32WSZ1UOFLW0VLVXCVAC1K'
+        const client_secret = 'XC4FNRIBWXZXAESV4YGHNEXV5KP4GWNYZUH0AWDZQOP0O4V0'
+        const ll = latlng || '39.9075,116.39723'
+        const parameters = {
+            client_id,
+            client_secret,
+            ll,
+            query,
+            v: '20180323',
+            limit: 10
+        }
+
+        catta(url + new URLSearchParams(parameters))
+            .then(res => {
+                const venues = res.response.venues
+                const markerList = venues.map((venue) => {
+                    const { id, name, location } = venue
+                    const { lat, lng } = location
+                    return { id, name, lat, lng }
+                })
+                this.setState({
+                    markerList
+                })
+            })
+            .catch(err => {
+                console.error('ERROR: ' + err)
+            })
+
+    }
 
     render() {
         const { google } = this.props
         const maps = google.maps
 
         const cityBeijingPos = new maps.LatLng(39.9047253699, 116.4072154982)
-        
+
         return (
             <div style={style}>
                 <Map
