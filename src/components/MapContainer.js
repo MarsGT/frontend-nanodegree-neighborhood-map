@@ -17,7 +17,24 @@ class MapContainer extends Component {
         showingInfoWindow: false,
         activeMarker: {},
         selectedPlace: {},
+        currentLocation: null
     };
+
+    componentDidMount() {
+        if (this.props.centerAroundCurrentLocation) {
+            if (navigator && navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    const coords = pos.coords
+                    this.setState({
+                        currentLocation: {
+                            lat: coords.latitude,
+                            lng: coords.longitude
+                        }
+                    })
+                })
+            }
+        }
+    }
 
     onMarkerClick = (props, marker) =>
         this.setState({
@@ -107,7 +124,7 @@ class MapContainer extends Component {
                     google={google}
                     zoom={14}
                     mapTypeControl={false}
-                    initialCenter={cityBeijing}
+                    initialCenter={currentLocation || cityBeijing}
                     styles={mapStyle}
                 >
                     <Marker
