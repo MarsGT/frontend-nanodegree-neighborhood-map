@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
 import { Loader } from 'rsuite'
-import catta from 'catta'
 
 // 加载提示
 const Loading = () => (
@@ -99,41 +98,6 @@ class MapContainer extends Component {
     }
 
     onMarkerClick = (props, marker) => { }
-
-    // 从Foursquare请求地点信息
-    getVenues = (latlng, search) => {
-        const url = 'https://api.foursquare.com/v2/venues/explore?'
-        const client_id = '3XGZ3YW1BLDWP0M1RDXHJUDQ1L32WSZ1UOFLW0VLVXCVAC1K'
-        const client_secret = 'XC4FNRIBWXZXAESV4YGHNEXV5KP4GWNYZUH0AWDZQOP0O4V0'
-        const ll = latlng || '39.9075,116.39723' // Foursquare的北京中心坐标
-        const query = search || ''
-        const parameters = {
-            client_id,
-            client_secret,
-            ll,
-            query,
-            v: '20180323',
-            limit: 10
-        }
-
-        // 请求数据
-        catta(url + new URLSearchParams(parameters))
-            .then(res => {
-                const venues = res.response.venues
-                const markerList = venues.map((venue) => {
-                    const { id, name, location } = venue
-                    const { lat, lng } = location
-                    return { id, name, lat, lng }
-                })
-                this.setState({
-                    markerList
-                })
-            })
-            .catch(err => {
-                console.error('ERROR: ' + err)
-            })
-
-    }
 
     render() {
         const { google } = this.props
