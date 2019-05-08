@@ -42,6 +42,7 @@ class App extends Component {
         this.getVenues(value, currLocation ? `${currLocation.lat},${currLocation.lng}` : '')
     }
 
+    // 点击搜索结果的回调
     handleClick = (ev, marker) => {
         const { lat, lng } = marker
         const location = { lat, lng }
