@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
 import { Loader } from 'rsuite'
+import catta from 'catta'
 
 // 加载提示
 const Loading = () => (
@@ -136,12 +137,13 @@ class MapContainer extends Component {
 
     render() {
         const { google } = this.props
+        const { currentLocation } = this.state
         const maps = google.maps
 
         const cityBeijingPos = new maps.LatLng(39.9047253699, 116.4072154982) // 北京市中心定位
 
         return (
-            <div style={style}>
+            <div>
                 <Map
                     google={google}
                     zoom={14}
