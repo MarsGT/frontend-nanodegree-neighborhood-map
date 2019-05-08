@@ -14,8 +14,9 @@ class App extends Component {
     }
 
     handleChange = (value) => {
+        const { currentLocation } = this.state
         this.setState({ value })
-        this.getVenues(value)
+        this.getVenues(value, currentLocation ? currentLocation : '')
     }
 
     // 下级调用，设置当前位置

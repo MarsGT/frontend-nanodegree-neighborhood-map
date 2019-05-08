@@ -96,10 +96,8 @@ class MapContainer extends Component {
         }
     }
 
-    onMarkerClick = (props, marker) => { }
-
     render() {
-        const { google } = this.props
+        const { google, markerList } = this.props
         const { currentLocation } = this.state
         const maps = google.maps
 
@@ -118,11 +116,14 @@ class MapContainer extends Component {
                     }}
                     styles={mapStyle}
                 >
-                    <Marker
-                        onClick={this.onMarkerClick}
-                        name={'???'}
-                        position={{ lat: 37.759703, lng: -122.428093 }}
-                    />
+                    {markerList.map((marker)=>
+                        <Marker
+                            key={marker.id}
+                            // onClick={this.onMarkerClick}
+                            name={markerList.name}
+                            position={{ lat: markerList.lat, lng: markerList.lng }}
+                        />
+                    )}
                 </Map>
             </div>
         )
