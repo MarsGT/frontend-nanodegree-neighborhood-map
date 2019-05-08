@@ -13,6 +13,7 @@ class App extends Component {
         markerList: []
     }
 
+    // 输入搜索字符后的回调
     handleChange = (value) => {
         const { currentLocation } = this.state
         this.setState({ value })
@@ -63,13 +64,11 @@ class App extends Component {
 
     }
 
-    renderTitle = () => <div>探索附近</div>
-
     render() {
         const { isExpand, value, markerList } = this.state
         return (
             <Frame className='App'>
-                <Frame.Nav expand={isExpand} renderTitle={this.renderTitle}>
+                <Frame.Nav expand={isExpand} renderTitle={() => <div>探索附近</div>}>
                     <Nav style={{ padding: 20, overflow: 'hidden' }}>
                         <InputGroup inside style={{ marginBottom: 10 }}>
                             <Input placeholder='请输入要搜索的内容' value={value} onChange={this.handleChange} role='search' aria-label='为您即时搜索附近的地点' />
