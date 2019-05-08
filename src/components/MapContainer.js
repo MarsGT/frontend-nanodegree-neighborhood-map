@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
+import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react'
 import { Loader } from 'rsuite'
 
 // 加载提示
@@ -76,21 +76,25 @@ const mapStyle = [
 ]
 class MapContainer extends Component {
     state = {
-        currFocus: this.props.currFocus
-    }
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            currFocus: nextProps.currFocus
-        });
+        currFocus: this.props.currFocus,
+        markerList: this.props.markerList,
+        activeMarker: null,
+        activeMarkerTitle: '',
+        showing: false
     }
 
-    onMarkerClick = (props, marker, e) => {
-        console.log(props, marker, e)
+    onMarkerClick = (props, marker, ev) => {
+        console.log(props, marker, ev)
+        this.setState({
+            activeMarker: marker,
+            activeMarkerTitle: props.title,
+            showing: true
+        })
     }
 
     render() {
-        const { google, markerList } = this.props
-        const { currFocus } = this.state
+        const { google, currFocus, markerList } = this.props
+        const { activeMarker, activeMarkerTitle, showing } = this.state
         const maps = google.maps
 
         const cityBeijingPos = new maps.LatLng(39.9047253699, 116.4072154982) // 北京市中心定位
@@ -121,6 +125,14 @@ class MapContainer extends Component {
                         />
                     )
                 }
+                <InfoWindow
+                    marker={activeMarker}
+                    visible={showing}
+                >
+                    <div>
+                        <h2>{activeMarkerTitle}</h2>
+                    </div>
+                </InfoWindow>
             </Map>
         )
     }

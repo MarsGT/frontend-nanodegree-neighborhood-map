@@ -69,7 +69,8 @@ class App extends Component {
             ll,
             query,
             v: '20180323',
-            limit: 20
+            limit: 20,      // 限制结果数量
+            radius: 7000    // 限制搜索范围
         }
 
         // 请求数据
