@@ -106,7 +106,7 @@ class MapContainer extends Component {
                 fullscreenControl={false}
                 center={currFocus ? currFocus : cityBeijingPos}
                 zoomControlOptions={{
-                    position: maps.ControlPosition.RIGHT_BOTTOM,
+                    position: maps.ControlPosition.TOP_LEFT,
                     style: maps.ZoomControlStyle.SMALL
                 }}
                 styles={mapStyle}
