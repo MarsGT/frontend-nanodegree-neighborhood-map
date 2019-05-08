@@ -9,7 +9,8 @@ class App extends Component {
     state = {
         isExpand: true,
         value: '',
-        markerList: []
+        markerList: [],
+        searchList: []
     }
 
     handleChange = (value) => {
@@ -35,15 +36,18 @@ class App extends Component {
 
         // 请求数据
         catta(url + new URLSearchParams(parameters))
-            .then(res => {
-                const venues = res.response.venues
-                const markerList = venues.map((venue) => {
+            .then((res) => {
+                const items = res.response.groups[0].items
+                const markerList = items.map((item) => {
+                    const { venue } = item
                     const { id, name, location } = venue
                     const { lat, lng } = location
                     return { id, name, lat, lng }
                 })
+                const searchList = markerList.map((i) => i.name)
                 this.setState({
-                    markerList
+                    markerList,
+                    searchList
                 })
             })
             .catch(err => {
@@ -63,7 +67,7 @@ class App extends Component {
                 <Frame.Nav expand={isExpand} renderTitle={this.renderTitle}>
                     <Nav style={{ padding: 20 }}>
                         <InputGroup inside style={{ marginBottom: 10 }}>
-                            <AutoComplete placeholder='请输入要搜索的内容' data={markerList} value={value} onChange={this.handleChange} />
+                            <AutoComplete placeholder='请输入要搜索的内容' data={searchList} value={value} onChange={this.handleChange} />
                             <InputGroup.Addon>
                                 <Icon icon='search' />
                             </InputGroup.Addon>
