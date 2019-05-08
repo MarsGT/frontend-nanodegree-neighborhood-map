@@ -39,7 +39,7 @@ class App extends Component {
             ll,
             query,
             v: '20180323',
-            limit: 15
+            limit: 20
         }
 
         // 请求数据
