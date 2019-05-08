@@ -72,12 +72,12 @@ class App extends Component {
                 <Frame.Nav expand={isExpand} renderTitle={this.renderTitle}>
                     <Nav style={{ padding: 20, overflow: 'hidden' }}>
                         <InputGroup inside style={{ marginBottom: 10 }}>
-                            <Input placeholder='请输入要搜索的内容' value={value} onChange={this.handleChange} />
+                            <Input placeholder='请输入要搜索的内容' value={value} onChange={this.handleChange} role='search' aria-label='为您即时搜索附近的地点' />
                             <InputGroup.Addon>
                                 <Icon icon='search' />
                             </InputGroup.Addon>
                         </InputGroup>
-                        {markerList.map(marker => <p key={marker.id} style={{ marginTop: 15 }}><Icon icon='map-marker' />&emsp;{marker.name}</p>)}
+                        {markerList.map(marker => <p key={marker.id} style={{ marginTop: 15 }} role='listitem' aria-label={marker.name}><Icon icon='map-marker' />&emsp;{marker.name}</p>)}
                     </Nav>
                 </Frame.Nav>
                 <Frame.Content>
