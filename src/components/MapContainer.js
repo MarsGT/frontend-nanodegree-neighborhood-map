@@ -113,10 +113,10 @@ class MapContainer extends Component {
                         <Marker
                             key={marker.id}
                             onClick={this.onMarkerClick}
-                            name={markerList.name}
+                            title={marker.name}
                             position={{
-                                lat: markerList.lat,
-                                lng: markerList.lng
+                                lat: marker.lat,
+                                lng: marker.lng
                             }}
                         />
                     )
