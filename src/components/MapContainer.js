@@ -108,14 +108,19 @@ class MapContainer extends Component {
                 }}
                 styles={mapStyle}
             >
-                {markerList || markerList.map((marker) =>
-                    <Marker
-                        key={marker.id}
-                        onClick={this.onMarkerClick}
-                        name={markerList.name}
-                        position={{ lat: markerList.lat, lng: markerList.lng }}
-                    />
-                )}
+                {
+                    markerList.map((marker) =>
+                        <Marker
+                            key={marker.id}
+                            onClick={this.onMarkerClick}
+                            name={markerList.name}
+                            position={{
+                                lat: markerList.lat,
+                                lng: markerList.lng
+                            }}
+                        />
+                    )
+                }
             </Map>
         )
     }

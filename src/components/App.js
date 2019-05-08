@@ -94,22 +94,65 @@ class App extends Component {
     }
 
     render() {
-        const { isExpand, value, currFocus, markerList } = this.state
+        const {
+            isExpand,
+            value,
+            currFocus,
+            markerList
+        } = this.state
+
         return (
             <Frame className='App'>
-                <Frame.Nav expand={isExpand} renderTitle={() => <div>探索附近</div>}>
-                    <Nav style={{ padding: 20, overflow: 'hidden' }}>
-                        <InputGroup inside style={{ marginBottom: 10 }}>
-                            <Input placeholder='请输入要搜索的内容' value={value} onChange={this.handleChange} role='search' aria-label='为您即时搜索附近的地点' />
+                <Frame.Nav
+                    expand={isExpand}
+                    renderTitle={() => <div>探索附近</div>}
+                >
+                    <Nav
+                        style={{
+                            padding: 20,
+                            overflow: 'hidden'
+                        }}
+                    >
+                        <InputGroup
+                            inside
+                            style={{
+                                marginBottom: 10
+                            }}
+                        >
+                            <Input
+                                placeholder='请输入要搜索的内容'
+                                value={value}
+                                onChange={this.handleChange}
+                                role='search'
+                                aria-label='为您即时搜索附近的地点'
+                            />
                             <InputGroup.Addon>
                                 <Icon icon='search' />
                             </InputGroup.Addon>
                         </InputGroup>
-                        {markerList.map(marker => <p key={marker.id} style={{ marginTop: 15, cursor: 'pointer' }} role='listitem' aria-label={marker.name} onClick={ev => this.handleClick(ev, marker)}><Icon icon='map-marker' />&emsp;{marker.name}</p>)}
+                        {
+                            markerList.map(marker =>
+                                <p
+                                    key={marker.id}
+                                    style={{
+                                        marginTop: 15,
+                                        cursor: 'pointer'
+                                    }}
+                                    role='listitem'
+                                    aria-label={marker.name}
+                                    onClick={ev => this.handleClick(ev, marker)}
+                                >
+                                    <Icon icon='map-marker' />&emsp;{marker.name}
+                                </p>
+                            )
+                        }
                     </Nav>
                 </Frame.Nav>
                 <Frame.Content>
-                    <MapContainer markerList={markerList} currFocus={currFocus} />
+                    <MapContainer
+                        markerList={markerList}
+                        currFocus={currFocus}
+                    />
                 </Frame.Content>
             </Frame>
         )
