@@ -75,30 +75,9 @@ const mapStyle = [
     }
 ]
 class MapContainer extends Component {
-    state = {
-        markerList: []
-    }
-
-    componentDidMount() {
-        if (navigator && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                const coords = pos.coords
-                this.props.setLocation({
-                    currentLocation: {
-                        lat: coords.latitude,
-                        lng: coords.longitude
-                    }
-                })
-            })
-        } else { // 没有获得定位信息
-            alert('抱歉！您的浏览器貌似不支持定位~')
-            console.error(`Error: Your browser doesn't support geolocation.`)
-        }
-    }
 
     render() {
-        const { google, markerList } = this.props
-        const { currentLocation } = this.state
+        const { google, markerList, currentLocation } = this.props
         const maps = google.maps
 
         const cityBeijingPos = new maps.LatLng(39.9047253699, 116.4072154982) // 北京市中心定位
@@ -109,7 +88,7 @@ class MapContainer extends Component {
                     google={google}
                     zoom={14}
                     mapTypeControl={false}
-                    initialCenter={currentLocation || cityBeijingPos}
+                    initialCenter={currentLocation ? currentLocation : cityBeijingPos}
                     zoomControlOptions={{
                         position: maps.ControlPosition.RIGHT_BOTTOM,
                         style: maps.ZoomControlStyle.SMALL

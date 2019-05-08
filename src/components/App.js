@@ -9,8 +9,26 @@ class App extends Component {
     state = {
         isExpand: true,
         currentLocation: null,
+        mapCenter: null,
         value: '',
         markerList: []
+    }
+
+    componentDidMount() {
+        if (navigator && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                const coords = pos.coords
+                this.setState({
+                    currentLocation: {
+                        lat: coords.latitude,
+                        lng: coords.longitude
+                    }
+                })
+            })
+        } else { // 没有获得定位信息
+            alert('抱歉！您的浏览器貌似不支持定位~')
+            console.error(`Error: Your browser doesn't support geolocation.`)
+        }
     }
 
     // 输入搜索字符后的回调
@@ -65,7 +83,7 @@ class App extends Component {
     }
 
     render() {
-        const { isExpand, value, markerList } = this.state
+        const { isExpand, value, mapCenter, markerList } = this.state
         return (
             <Frame className='App'>
                 <Frame.Nav expand={isExpand} renderTitle={() => <div>探索附近</div>}>
@@ -80,7 +98,7 @@ class App extends Component {
                     </Nav>
                 </Frame.Nav>
                 <Frame.Content>
-                    <MapContainer markerList={markerList} setLocation={this.updateLocation} />
+                    <MapContainer markerList={markerList} mapCenter={mapCenter} setLocation={this.updateLocation} />
                 </Frame.Content>
             </Frame>
         )
