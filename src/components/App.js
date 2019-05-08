@@ -8,6 +8,7 @@ import catta from 'catta'
 class App extends Component {
     state = {
         isExpand: true,
+        currentLocation: null,
         value: '',
         markerList: [],
         searchList: []
@@ -16,6 +17,13 @@ class App extends Component {
     handleChange = (value) => {
         this.setState({ value })
         this.getVenues(value)
+    }
+
+    // 下级调用，设置当前位置
+    updateLocation(currentLocation) {
+        this.setState({
+            currentLocation
+        })
     }
 
     // 从Foursquare请求地点信息
@@ -75,7 +83,7 @@ class App extends Component {
                     </Nav>
                 </Frame.Nav>
                 <Frame.Content>
-                    <MapContainer markerList={markerList} />
+                    <MapContainer markerList={markerList} setLocation={this.updateLocation} />
                 </Frame.Content>
             </Frame>
         )

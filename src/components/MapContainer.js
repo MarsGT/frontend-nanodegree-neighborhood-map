@@ -76,7 +76,6 @@ const mapStyle = [
 ]
 class MapContainer extends Component {
     state = {
-        currentLocation: null,
         markerList: []
     }
 
@@ -84,7 +83,7 @@ class MapContainer extends Component {
         if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((pos) => {
                 const coords = pos.coords
-                this.setState({
+                this.props.setLocation({
                     currentLocation: {
                         lat: coords.latitude,
                         lng: coords.longitude
