@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
-import { Icon, Nav, Input, InputGroup } from 'rsuite'
+import { Icon, Nav, Input, InputGroup, Modal } from 'rsuite'
 import Frame from '@rsuite/react-frame'
 import '../style/react-frame.css'
 import MapContainer from './MapContainer'
 import catta from 'catta'
+
+const foursquare = {
+    client_id: '3XGZ3YW1BLDWP0M1RDXHJUDQ1L32WSZ1UOFLW0VLVXCVAC1K',
+    client_secret: 'XC4FNRIBWXZXAESV4YGHNEXV5KP4GWNYZUH0AWDZQOP0O4V0'
+}
 
 class App extends Component {
     state = {
@@ -11,7 +16,9 @@ class App extends Component {
         currLocation: null,
         currFocus: null,
         value: '',
-        markerList: []
+        markerList: [],
+        showing: false,
+        markerInfo: null
     }
 
     componentDidMount() {
@@ -44,9 +51,10 @@ class App extends Component {
 
     // 点击搜索结果的回调
     handleClick = (ev, marker) => {
-        const { lat, lng } = marker
+        const { lat, lng, id } = marker
         const location = { lat, lng }
         this.updateFocus(location)
+        this.getVenueInfo(id)
     }
 
     // 更新当前聚焦位置（在地图中体现）
@@ -56,11 +64,10 @@ class App extends Component {
         })
     }
 
-    // 从Foursquare请求地点信息
+    // 从Foursquare请求地点列表
     getVenues = (search, latlng) => {
         const url = 'https://api.foursquare.com/v2/venues/explore?'
-        const client_id = '3XGZ3YW1BLDWP0M1RDXHJUDQ1L32WSZ1UOFLW0VLVXCVAC1K'
-        const client_secret = 'XC4FNRIBWXZXAESV4YGHNEXV5KP4GWNYZUH0AWDZQOP0O4V0'
+        const { client_id, client_secret } = foursquare
         const ll = latlng || '39.9075,116.39723' // Foursquare的北京中心坐标
         const query = search || ''
         const parameters = {
@@ -91,7 +98,43 @@ class App extends Component {
                 console.error(`[getVenues]\tERROR:${err.message}`)
                 console.error(`query='${query}'`)
             })
+    }
 
+    // 从Foursquare请求地点详细信息
+    getVenueInfo = (id) => {
+        const url = `https://api.foursquare.com/v2/venues/${id}?`
+        const { client_id, client_secret } = foursquare
+        const parameters = {
+            client_id,
+            client_secret,
+            v: '20180323'
+        }
+
+        // 请求数据
+        catta(url + new URLSearchParams(parameters))
+            .then((res) => {
+                const venue = res.response.venue
+                const markerInfo = {
+                    name: venue.name,
+                    cate: venue.categories[0].name,
+                    phone: venue.contact.formattedPhone || '',
+                    addr: venue.formattedAddress ? venue.formattedAddress.join(', ') : '',
+                    post: venue.postalCode || '',
+                    url: venue.url || ''
+                }
+                this.setState({
+                    markerInfo,
+                    showing: true
+                })
+            })
+            .catch(err => {
+                console.error(`[getVenueInfo]\tERROR:${err.message}`)
+            })
+
+    }
+
+    close = () => {
+        this.setState({ showing: false });
     }
 
     render() {
@@ -99,7 +142,9 @@ class App extends Component {
             isExpand,
             value,
             currFocus,
-            markerList
+            markerList,
+            markerInfo,
+            showing
         } = this.state
 
         return (
@@ -155,6 +200,21 @@ class App extends Component {
                         currFocus={currFocus}
                     />
                 </Frame.Content>
+                {markerInfo &&
+                    <Modal show={showing} onHide={this.close}>
+                        <Modal.Header>
+                            <Modal.Title>地点信息</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>名称：{markerInfo.name}</p>
+                            <p>类别：{markerInfo.cate}</p>
+                            <p>电话：{markerInfo.phone}</p>
+                            <p>地址：{markerInfo.addr}</p>
+                            <p>邮编：{markerInfo.post}</p>
+                            <p>网址：{markerInfo.url}</p>
+                        </Modal.Body>
+                    </Modal>
+                }
             </Frame>
         )
     }

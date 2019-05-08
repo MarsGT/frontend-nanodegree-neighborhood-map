@@ -83,8 +83,7 @@ class MapContainer extends Component {
         showing: false
     }
 
-    onMarkerClick = (props, marker, ev) => {
-        console.log(props, marker, ev)
+    onMarkerClick = (props, marker) => {
         this.setState({
             activeMarker: marker,
             activeMarkerTitle: props.title,
