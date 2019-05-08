@@ -12,21 +12,22 @@ class App extends Component {
         markerList: []
     }
 
-    handleChange(value) {
+    handleChange(ev, value) {
+        console.log(ev)
         this.setState({
             value
         });
     }
     getLogo = () => <img alt="" height="20" width="20" src="https://rsuitejs.com/favicon.ico" />
-    renderTitle = () => <div style={{ textAlign: 'center' }}>搜索</div>
+    renderTitle = () => <div>搜索</div>
 
     render() {
         const { isExpand, data, value, markerList } = this.state
         return (
             <Frame className='App'>
                 <Frame.Nav expand={isExpand} renderTitle={this.renderTitle} brand={this.getLogo}>
-                    <Nav>
-                        <InputGroup inside style={{ width: 300, marginBottom: 10 }}>
+                    <Nav style={{ padding: 20 }}>
+                        <InputGroup inside style={{ marginBottom: 10 }}>
                             <AutoComplete placeholder='请输入要搜索的内容' data={data} value={value} onChange={this.handleChange} />
                             <InputGroup.Addon>
                                 <Icon icon='search' />

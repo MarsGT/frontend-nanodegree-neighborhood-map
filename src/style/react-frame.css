@@ -65,6 +65,7 @@
 .hypers-frame .header-hrand {
     padding: 18px;
     font-size: 16px;
+    height: 56px;
     background: #fff;
     color: #555;
     white-space: nowrap;
