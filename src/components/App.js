@@ -8,8 +8,8 @@ import catta from 'catta'
 class App extends Component {
     state = {
         isExpand: true,
-        currentLocation: null,
-        mapCenter: null,
+        currLocation: null,
+        currFocus: null,
         value: '',
         markerList: []
     }
@@ -18,11 +18,15 @@ class App extends Component {
         if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((pos) => {
                 const coords = pos.coords
+                const location = {
+                    lat: coords.latitude,
+                    lng: coords.longitude
+                }
+                // 同时设置当前定位和当前聚焦为请求的定位位置，
+                // 目的在于使地图第一次聚焦到定位
                 this.setState({
-                    currentLocation: {
-                        lat: coords.latitude,
-                        lng: coords.longitude
-                    }
+                    currLocation: location,
+                    currFocus: location
                 })
             })
         } else { // 没有获得定位信息
@@ -33,15 +37,21 @@ class App extends Component {
 
     // 输入搜索字符后的回调
     handleChange = (value) => {
-        const { currentLocation } = this.state
+        const { currLocation } = this.state
         this.setState({ value })
-        this.getVenues(value, currentLocation ? currentLocation : '')
+        this.getVenues(value, currLocation ? `${currLocation.lat},${currLocation.lng}` : '')
     }
 
-    // 下级调用，设置当前位置
-    updateLocation(currentLocation) {
+    handleClick = (ev, marker) => {
+        const { lat, lng } = marker
+        const location = { lat, lng }
+        this.updateFocus(location)
+    }
+
+    // 更新当前聚焦位置（在地图中体现）
+    updateFocus = (location) => {
         this.setState({
-            currentLocation
+            currFocus: location
         })
     }
 
@@ -83,7 +93,7 @@ class App extends Component {
     }
 
     render() {
-        const { isExpand, value, mapCenter, markerList } = this.state
+        const { isExpand, value, currFocus, markerList } = this.state
         return (
             <Frame className='App'>
                 <Frame.Nav expand={isExpand} renderTitle={() => <div>探索附近</div>}>
@@ -94,11 +104,11 @@ class App extends Component {
                                 <Icon icon='search' />
                             </InputGroup.Addon>
                         </InputGroup>
-                        {markerList.map(marker => <p key={marker.id} style={{ marginTop: 15 }} role='listitem' aria-label={marker.name}><Icon icon='map-marker' />&emsp;{marker.name}</p>)}
+                        {markerList.map(marker => <p key={marker.id} style={{ marginTop: 15, cursor: 'pointer' }} role='listitem' aria-label={marker.name} onClick={ev => this.handleClick(ev, marker)}><Icon icon='map-marker' />&emsp;{marker.name}</p>)}
                     </Nav>
                 </Frame.Nav>
                 <Frame.Content>
-                    <MapContainer markerList={markerList} mapCenter={mapCenter} setLocation={this.updateLocation} />
+                    <MapContainer markerList={markerList} currFocus={currFocus} />
                 </Frame.Content>
             </Frame>
         )

@@ -77,7 +77,7 @@ const mapStyle = [
 class MapContainer extends Component {
 
     render() {
-        const { google, markerList, currentLocation } = this.props
+        const { google, markerList, currFocus } = this.props
         const maps = google.maps
 
         const cityBeijingPos = new maps.LatLng(39.9047253699, 116.4072154982) // 北京市中心定位
@@ -88,7 +88,7 @@ class MapContainer extends Component {
                     google={google}
                     zoom={14}
                     mapTypeControl={false}
-                    initialCenter={currentLocation ? currentLocation : cityBeijingPos}
+                    center={currFocus ? currFocus : cityBeijingPos}
                     zoomControlOptions={{
                         position: maps.ControlPosition.RIGHT_BOTTOM,
                         style: maps.ZoomControlStyle.SMALL
