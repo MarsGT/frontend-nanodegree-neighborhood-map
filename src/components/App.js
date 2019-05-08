@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Nav, AutoComplete, InputGroup } from 'rsuite'
+import { Icon, Nav, Input, InputGroup } from 'rsuite'
 import Frame from '@rsuite/react-frame'
 import '../style/react-frame.css'
 import MapContainer from './MapContainer'
@@ -10,8 +10,7 @@ class App extends Component {
         isExpand: true,
         currentLocation: null,
         value: '',
-        markerList: [],
-        searchList: []
+        markerList: []
     }
 
     handleChange = (value) => {
@@ -39,7 +38,7 @@ class App extends Component {
             ll,
             query,
             v: '20180323',
-            limit: 10
+            limit: 15
         }
 
         // 请求数据
@@ -52,10 +51,8 @@ class App extends Component {
                     const { lat, lng } = location
                     return { id, name, lat, lng }
                 })
-                const searchList = markerList.map((i) => i.name)
                 this.setState({
-                    markerList,
-                    searchList
+                    markerList
                 })
             })
             .catch(err => {
@@ -65,21 +62,21 @@ class App extends Component {
 
     }
 
-    getLogo = () => <Icon icon='search' />
-    renderTitle = () => <div>搜索</div>
+    renderTitle = () => <div>探索附近</div>
 
     render() {
         const { isExpand, value, markerList } = this.state
         return (
             <Frame className='App'>
                 <Frame.Nav expand={isExpand} renderTitle={this.renderTitle}>
-                    <Nav style={{ padding: 20 }}>
+                    <Nav style={{ padding: 20, overflow: 'hidden' }}>
                         <InputGroup inside style={{ marginBottom: 10 }}>
-                            <AutoComplete placeholder='请输入要搜索的内容' data={searchList} value={value} onChange={this.handleChange} />
+                            <Input placeholder='请输入要搜索的内容' value={value} onChange={this.handleChange} />
                             <InputGroup.Addon>
                                 <Icon icon='search' />
                             </InputGroup.Addon>
                         </InputGroup>
+                        {markerList.map(marker => <p key={marker.id} style={{ marginTop: 15 }}><Icon icon='map-marker' />&emsp;{marker.name}</p>)}
                     </Nav>
                 </Frame.Nav>
                 <Frame.Content>
