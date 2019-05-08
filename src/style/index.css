@@ -10,3 +10,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+/* 隐藏侧面板切换按钮 */
+.rs-navbar-body {
+    display: none;
+}
