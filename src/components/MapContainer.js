@@ -3,75 +3,57 @@ import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react'
 import { Loader } from 'rsuite'
 
 // 加载提示
-const Loading = () => (
-    <Loader backdrop center speed='fast' size='md' content='正在加载，请稍候...' />
-)
+const Loading = () => <Loader backdrop center speed="fast" size="md" content="正在加载，请稍候..." />
 
 // 自定义地图样式
 const mapStyle = [
     {
         featureType: 'water',
-        stylers: [
-            { color: '#19a0d8' }
-        ]
-    }, {
+        stylers: [{ color: '#19a0d8' }]
+    },
+    {
         featureType: 'administrative',
         elementType: 'labels.text.stroke',
-        stylers: [
-            { color: '#ffffff' },
-            { weight: 6 }
-        ]
-    }, {
+        stylers: [{ color: '#ffffff' }, { weight: 6 }]
+    },
+    {
         featureType: 'administrative',
         elementType: 'labels.text.fill',
-        stylers: [
-            { color: '#e85113' }
-        ]
-    }, {
+        stylers: [{ color: '#e85113' }]
+    },
+    {
         featureType: 'road.highway',
         elementType: 'geometry.stroke',
-        stylers: [
-            { color: '#efe9e4' },
-            { lightness: -40 }
-        ]
-    }, {
+        stylers: [{ color: '#efe9e4' }, { lightness: -40 }]
+    },
+    {
         featureType: 'transit.station',
-        stylers: [
-            { weight: 9 },
-            { hue: '#e85113' }
-        ]
-    }, {
+        stylers: [{ weight: 9 }, { hue: '#e85113' }]
+    },
+    {
         featureType: 'road.highway',
         elementType: 'labels.icon',
-        stylers: [
-            { visibility: 'off' }
-        ]
-    }, {
+        stylers: [{ visibility: 'off' }]
+    },
+    {
         featureType: 'water',
         elementType: 'labels.text.stroke',
-        stylers: [
-            { lightness: 100 }
-        ]
-    }, {
+        stylers: [{ lightness: 100 }]
+    },
+    {
         featureType: 'water',
         elementType: 'labels.text.fill',
-        stylers: [
-            { lightness: -100 }
-        ]
-    }, {
+        stylers: [{ lightness: -100 }]
+    },
+    {
         featureType: 'poi',
         elementType: 'geometry',
-        stylers: [
-            { visibility: 'on' },
-            { color: '#f0e4d3' }
-        ]
-    }, {
+        stylers: [{ visibility: 'on' }, { color: '#f0e4d3' }]
+    },
+    {
         featureType: 'road.highway',
         elementType: 'geometry.fill',
-        stylers: [
-            { color: '#efe9e4' },
-            { lightness: -25 }
-        ]
+        stylers: [{ color: '#efe9e4' }, { lightness: -25 }]
     }
 ]
 class MapContainer extends Component {
@@ -109,25 +91,19 @@ class MapContainer extends Component {
                     position: maps.ControlPosition.TOP_LEFT,
                     style: maps.ZoomControlStyle.SMALL
                 }}
-                styles={mapStyle}
-            >
-                {
-                    markerList.map((marker) =>
-                        <Marker
-                            key={marker.id}
-                            onClick={this.onMarkerClick}
-                            title={marker.name}
-                            position={{
-                                lat: marker.lat,
-                                lng: marker.lng
-                            }}
-                        />
-                    )
-                }
-                <InfoWindow
-                    marker={activeMarker}
-                    visible={showing}
-                >
+                styles={mapStyle}>
+                {markerList.map(marker => (
+                    <Marker
+                        key={marker.id}
+                        onClick={this.onMarkerClick}
+                        title={marker.name}
+                        position={{
+                            lat: marker.lat,
+                            lng: marker.lng
+                        }}
+                    />
+                ))}
+                <InfoWindow marker={activeMarker} visible={showing}>
                     <div>
                         <h2>{activeMarkerTitle}</h2>
                     </div>

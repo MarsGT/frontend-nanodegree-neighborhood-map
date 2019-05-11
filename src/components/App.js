@@ -23,7 +23,7 @@ class App extends Component {
 
     componentDidMount() {
         if (navigator && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((pos) => {
+            navigator.geolocation.getCurrentPosition(pos => {
                 const coords = pos.coords
                 const location = {
                     lat: coords.latitude,
@@ -36,14 +36,15 @@ class App extends Component {
                     currFocus: location
                 })
             })
-        } else { // 没有获得定位信息
+        } else {
+            // 没有获得定位信息
             alert('抱歉！您的浏览器貌似不支持定位~')
             console.error(`Error: Your browser doesn't support geolocation.`)
         }
     }
 
     // 输入搜索字符后的回调
-    handleChange = (value) => {
+    handleChange = value => {
         const { currLocation } = this.state
         this.setState({ value })
         this.getVenues(value, currLocation ? `${currLocation.lat},${currLocation.lng}` : '')
@@ -58,7 +59,7 @@ class App extends Component {
     }
 
     // 更新当前聚焦位置（在地图中体现）
-    updateFocus = (location) => {
+    updateFocus = location => {
         this.setState({
             currFocus: location
         })
@@ -76,15 +77,15 @@ class App extends Component {
             ll,
             query,
             v: '20180323',
-            limit: 20,      // 限制结果数量
-            radius: 7000    // 限制搜索范围
+            limit: 20, // 限制结果数量
+            radius: 7000 // 限制搜索范围
         }
 
         // 请求数据
         catta(url + new URLSearchParams(parameters))
-            .then((res) => {
+            .then(res => {
                 const items = res.response.groups[0].items
-                const markerList = items.map((item) => {
+                const markerList = items.map(item => {
                     const { venue } = item
                     const { id, name, location } = venue
                     const { lat, lng } = location
@@ -101,7 +102,7 @@ class App extends Component {
     }
 
     // 从Foursquare请求地点详细信息
-    getVenueInfo = (id) => {
+    getVenueInfo = id => {
         const url = `https://api.foursquare.com/v2/venues/${id}?`
         const { client_id, client_secret } = foursquare
         const parameters = {
@@ -112,7 +113,7 @@ class App extends Component {
 
         // 请求数据
         catta(url + new URLSearchParams(parameters))
-            .then((res) => {
+            .then(res => {
                 const venue = res.response.venue
                 const markerInfo = {
                     name: venue.name,
@@ -130,77 +131,59 @@ class App extends Component {
             .catch(err => {
                 console.error(`[getVenueInfo]\tERROR:${err.message}`)
             })
-
     }
 
     close = () => {
-        this.setState({ showing: false });
+        this.setState({ showing: false })
     }
 
     render() {
-        const {
-            isExpand,
-            value,
-            currFocus,
-            markerList,
-            markerInfo,
-            showing
-        } = this.state
+        const { isExpand, value, currFocus, markerList, markerInfo, showing } = this.state
 
         return (
-            <Frame className='App'>
-                <Frame.Nav
-                    expand={isExpand}
-                    renderTitle={() => <div>探索附近</div>}
-                >
+            <Frame className="App">
+                <Frame.Nav expand={isExpand} renderTitle={() => <div>探索附近</div>}>
                     <Nav
                         style={{
                             padding: 20,
                             overflow: 'hidden'
-                        }}
-                    >
+                        }}>
                         <InputGroup
                             inside
                             style={{
                                 marginBottom: 10
-                            }}
-                        >
+                            }}>
                             <Input
-                                placeholder='请输入要搜索的内容'
+                                placeholder="请输入要搜索的内容"
                                 value={value}
                                 onChange={this.handleChange}
-                                role='search'
-                                aria-label='为您即时搜索附近的地点'
+                                role="search"
+                                aria-label="为您即时搜索附近的地点"
                             />
                             <InputGroup.Addon>
-                                <Icon icon='search' />
+                                <Icon icon="search" />
                             </InputGroup.Addon>
                         </InputGroup>
-                        {
-                            markerList.map(marker =>
-                                <p
-                                    key={marker.id}
-                                    style={{
-                                        marginTop: 15,
-                                        cursor: 'pointer'
-                                    }}
-                                    role='listitem'
-                                    aria-label={marker.name}
-                                    onClick={ev => this.handleClick(ev, marker)}
-                                >
-                                    <Icon icon='map-marker' />&emsp;{marker.name}
-                                </p>
-                            )
-                        }
+                        {markerList.map(marker => (
+                            <p
+                                key={marker.id}
+                                style={{
+                                    marginTop: 15,
+                                    cursor: 'pointer'
+                                }}
+                                role="listitem"
+                                aria-label={marker.name}
+                                onClick={ev => this.handleClick(ev, marker)}>
+                                <Icon icon="map-marker" />
+                                &emsp;{marker.name}
+                            </p>
+                        ))}
                     </Nav>
                 </Frame.Nav>
                 <Frame.Content>
-                    <MapContainer
-                        markerList={markerList}
-                        currFocus={currFocus}
-                    />
+                    <MapContainer markerList={markerList} currFocus={currFocus} />
                 </Frame.Content>
-                {markerInfo &&
+                {markerInfo && (
                     <Modal show={showing} onHide={this.close}>
                         <Modal.Header>
                             <Modal.Title>地点信息</Modal.Title>
@@ -214,10 +197,10 @@ class App extends Component {
                             <p>网址：{markerInfo.url}</p>
                         </Modal.Body>
                     </Modal>
-                }
+                )}
             </Frame>
         )
     }
 }
 
-export default App;
+export default App
