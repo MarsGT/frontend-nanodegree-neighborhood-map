@@ -6,8 +6,8 @@ import MapContainer from './MapContainer'
 import catta from 'catta'
 
 const foursquare = {
-    client_id: '3XGZ3YW1BLDWP0M1RDXHJUDQ1L32WSZ1UOFLW0VLVXCVAC1K',
-    client_secret: 'XC4FNRIBWXZXAESV4YGHNEXV5KP4GWNYZUH0AWDZQOP0O4V0'
+    client_id: 'YOUR_CLIENT_ID',
+    client_secret: 'YOUR_CLIENT_SECRET'
 }
 
 class App extends Component {

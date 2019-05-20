@@ -15,6 +15,8 @@
 ## 怎样运行
 
 -   在命令行克隆本项目 `git clone https://github.com/marsgt/frontend-nanodegree-neighborhood-map.git`
+-   申请 Foursquare 与 Google Maps API 开发权限，建立开发项目并获得各自的权限密钥
+-   将上一步中获得的 Foursquare 的 ClientID 与 ClientSecret 填入 App.js，将 Google Maps API 所获得的 ApiKey 填入 MapContainer.js
 -   使用 `cd frontend-nanodegree-neighborhood-map`切换到根目录下，运行`yarn install`安装所有的项目依赖
 -   安装依赖后，运行 `yarn start`将启动项目（开发服务器）并直接打开网页
 -   可以使用 `yarn build`，将本项目编译为可在生产环境下部署的静态文件
